@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tukare | Simple Fleet Management</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- LANDING PAGE -->
+
+    <!-- explains what Tukare does -->
+    <section id="landingPage" class="page landing-page">
+      <header class="topbar">
+        <a
+          class="brand"
+          href="#"
+          onclick="
+            showPage('landingPage');
+            return false;
+          "
+          >TUKARE<span>.</span></a
+        >
+        <button class="button button-outline" onclick="showPage('loginPage')">
+          Sign in
+        </button>
+      </header>
+      <main class="hero">
+        <div class="central">SIMPLE FLEET MANAGEMENT</div>
+        <h1>Keep your fleet<br /><span>moving forward.</span></h1>
+        <p class="hero-copy">
+          Tukare helps small fleet owners keep vehicle records, track driver
+          remittances and record operating expenses in one simple place.
+        </p>
+        <div class="hero-actions">
+          <button class="button" onclick="showPage('loginPage')">
+            Get started <span aria-hidden="true">→</span>
+          </button>
+          <a class="text-link" href="#about">Learn about Tukare</a>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">01</div>
+            <h3>Vehicle records</h3>
+            <p>
+              Keep registration numbers, driver names and daily targets
+              together.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">02</div>
+            <h3>Remittances</h3>
+            <p>
+              Record payments received from drivers and the dates they were
+              paid.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">03</div>
+            <h3>Expenses</h3>
+            <p>
+              Track repairs, fuel and other running costs for your vehicles.
+            </p>
+          </article>
+        </div>
+      </main>
+      <section id="about" class="about-section">
+        <div class="central">ABOUT US</div>
+        <h2>A clearer view of your transport business.</h2>
+        <p>
+          Tukare is a simple fleet management project designed to help vehicle
+          owners organise everyday information without relying on scattered
+          notebooks. The aim is to make it easier to review vehicles, money
+          received and expenses.
+        </p>
+      </section>
+      <footer class="footer">Tukare · A simple fleet management system</footer>
+    </section>
+  </body>
+</html>

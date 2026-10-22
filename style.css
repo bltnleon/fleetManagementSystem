@@ -1,0 +1,198 @@
+/* 1. SETTINGS AND COLOURS TO USE ALLOVER THE CSS */
+:root {
+  --green: #176b4d;
+  --green-dark: #104b38;
+  --green-pale: #eaf4ee;
+  --ink: #1d2a24;
+  --muted: #718078;
+  --line: #e1e9e3;
+  --paper: #fff;
+  --bg: #f5f8f5;
+  --red: #a43c36;
+  --amber: #94621b;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.hidden {
+  display: none !important;
+}
+.muted {
+  color: var(--muted);
+}
+/* 2. SHARED BUTTONS AND BRAND */
+.brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--green-dark);
+}
+.brand span {
+  color: #8cbf73;
+}
+.button {
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+  padding: 11px 17px;
+  font-weight: 700;
+  transition: background 0.15s;
+}
+.button:hover {
+  background: var(--green-dark);
+}
+.button-outline {
+  background: transparent;
+  color: var(--green);
+}
+.button-outline:hover {
+  background: var(--green-pale);
+}
+.button-small {
+  padding: 8px 12px;
+  font-size: 0.88rem;
+}
+.full-width {
+  width: 100%;
+  margin-top: 18px;
+}
+.central {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.text-link {
+  font-weight: 700;
+  color: var(--green);
+  font-size: 1rem;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* 3. LANDING PAGE */
+.topbar {
+  max-width: 1120px;
+  margin: auto;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.landing-page {
+  background: linear-gradient(180deg, #f5f9f5 0%, #fff 72%);
+}
+.hero {
+  max-width: 1064px;
+  margin: 0 auto;
+  padding: 70px 28px 58px;
+}
+.hero h1 {
+  font-size: clamp(2.7rem, 6vw, 4.8rem);
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  margin: 0;
+  max-width: 760px;
+}
+.hero h1 span {
+  color: var(--green);
+}
+.hero-copy {
+  max-width: 620px;
+  color: #617168;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 24px 0;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 70px;
+}
+.feature-card {
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 6px 24px #183c2610;
+}
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--green-pale);
+  color: var(--green);
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+.feature-card h3 {
+  margin: 18px 0 7px;
+  font-size: 1.08rem;
+}
+.feature-card p,
+.about-section p {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.75;
+  margin: 0;
+}
+.about-section {
+  max-width: 1064px;
+  margin: 0 auto;
+  padding: 45px 28px 72px;
+  border-top: 1px solid var(--line);
+}
+.about-section h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  letter-spacing: -0.03em;
+  max-width: 620px;
+  margin: 0 0 14px;
+}
+.about-section p {
+  max-width: 760px;
+}
+.footer {
+  padding: 22px 28px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
