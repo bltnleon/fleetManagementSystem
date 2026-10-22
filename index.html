@@ -77,5 +77,375 @@
       </section>
       <footer class="footer">Tukare · A simple fleet management system</footer>
     </section>
+    <!-- LOGIN PAGE SECTION -->
+
+    <!-- sign-in before opening the dashboard -->
+    <section id="loginPage" class="page login-page hidden">
+      <button class="back-link" onclick="showPage('landingPage')">
+        ← Back to home
+      </button>
+      <div class="login-card">
+        <a
+          class="brand"
+          href="#"
+          onclick="
+            showPage('landingPage');
+            return false;
+          "
+          >TUKARE<span>.</span></a
+        >
+        <h1>Welcome back</h1>
+        <p class="muted">Sign in to open your fleet dashboard.</p>
+        <form id="loginForm">
+          <label for="username">Username</label
+          ><input
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+            placeholder="Enter any username"
+          />
+          <label for="password">Password</label
+          ><input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            placeholder="Enter any password"
+          />
+          <button class="button full-width" type="submit">Sign in</button>
+        </form>
+        <p class="demo-note">
+          For Demo only: any non-empty username and password will work. This is
+          not secure real authentication.
+        </p>
+      </div>
+    </section>
+
+    <!-- DASHBOARD SECTION -->
+
+    <!--the main fleet management area -->
+    <section id="dashboardPage" class="page dashboard-page hidden">
+      <aside class="sidebar">
+        <a
+          class="brand"
+          href="#"
+          onclick="
+            showDashboardSection('overview');
+            return false;
+          "
+          >TUKARE<span>.</span></a
+        >
+        <div class="side-label">WORKSPACE</div>
+        <button class="nav-button active" data-section="overview">
+          ▦ <span>Overview</span>
+        </button>
+        <button class="nav-button" data-section="vehicles">
+          ▣ <span>Vehicles</span>
+        </button>
+        <button class="nav-button" data-section="remittances">
+          ↗ <span>Remittances</span>
+        </button>
+        <button class="nav-button" data-section="expenses">
+          ↘ <span>Expenses</span>
+        </button>
+        <div class="sidebar-bottom">
+          <span id="signedInLabel">Signed in</span
+          ><button class="logout-button" id="logoutButton">Sign out</button>
+        </div>
+      </aside>
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div>
+            <div class="central">FLEET WORKSPACE</div>
+            <h1 id="sectionTitle">Overview</h1>
+          </div>
+          <div class="user-chip">
+            <span class="user-dot"></span><span id="headerUsername">User</span>
+          </div>
+        </header>
+
+        <!-- OVERVIEW UNDER DASHBOARD -->
+
+        <!--totals are calculated from records entered by the user -->
+        <section id="overviewSection" class="dashboard-section">
+          <p class="muted intro-text">
+            A quick look at your records. Add your own information to get
+            started.
+          </p>
+          <div class="stat-grid">
+            <article class="stat-card">
+              <span>Total vehicles</span><strong id="totalVehicles">0</strong
+              ><small>All registered vehicles</small>
+            </article>
+            <article class="stat-card">
+              <span>Active vehicles</span><strong id="activeVehicles">0</strong
+              ><small>Not marked as sold</small>
+            </article>
+            <article class="stat-card">
+              <span>Today's remittances</span
+              ><strong id="collectedToday">KES 0</strong
+              ><small>Payments recorded today</small>
+            </article>
+            <article class="stat-card">
+              <span>Today's expenses</span
+              ><strong id="expensesToday">KES 0</strong
+              ><small>Expenses recorded today</small>
+            </article>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Vehicle register</h2>
+                <p>Most recently added vehicles</p>
+              </div>
+              <button
+                class="button button-small"
+                onclick="showDashboardSection('vehicles')"
+              >
+                Manage vehicles
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Registration</th>
+                    <th>Driver</th>
+                    <th>Daily target</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardVehicleTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VEHICLE MANAGEMENT -->
+
+        <!-- add, edit, mark sold and restore vehicles -->
+        <section id="vehiclesSection" class="dashboard-section hidden">
+          <div class="panel form-panel">
+            <div class="panel-heading">
+              <div>
+                <h2 id="vehicleFormTitle">Add a vehicle</h2>
+                <p>Enter details for a vehicle in your fleet.</p>
+              </div>
+            </div>
+            <form id="vehicleForm" class="form-grid">
+              <input type="hidden" id="vehicleId" />
+              <div class="field">
+                <label for="registration">Registration number</label
+                ><input
+                  id="registration"
+                  required
+                  placeholder="e.g. KXX 123X"
+                />
+              </div>
+              <div class="field">
+                <label for="driverName">Driver name</label
+                ><input id="driverName" required placeholder="Driver's name" />
+              </div>
+              <div class="field">
+                <label for="dailyTarget">Daily target (KES)</label
+                ><input
+                  id="dailyTarget"
+                  type="number"
+                  min="0"
+                  step="1"
+                  required
+                  placeholder="0"
+                />
+              </div>
+              <div class="form-actions">
+                <button class="button" type="submit" id="vehicleSubmitButton">
+                  Save vehicle</button
+                ><button
+                  class="button button-outline hidden"
+                  type="button"
+                  id="cancelEditButton"
+                >
+                  Cancel edit
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>All vehicles</h2>
+                <p>Your records, including vehicles marked as sold.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Registration</th>
+                    <th>Driver</th>
+                    <th>Daily target</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="vehicleTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- COLLECTIONS MANAGEMENT -->
+
+        <!-- record money received from a driver -->
+        <section id="remittancesSection" class="dashboard-section hidden">
+          <div class="panel form-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Record a remittance</h2>
+                <p>Enter a payment received from a driver.</p>
+              </div>
+            </div>
+            <form id="remittanceForm" class="form-grid">
+              <div class="field">
+                <label for="paymentVehicle">Vehicle</label
+                ><select id="paymentVehicle" required></select>
+              </div>
+              <div class="field">
+                <label for="paymentDate">Payment date</label
+                ><input id="paymentDate" type="date" required />
+              </div>
+              <div class="field">
+                <label for="paymentAmount">Amount (KES)</label
+                ><input
+                  id="paymentAmount"
+                  type="number"
+                  min="1"
+                  step="1"
+                  required
+                  placeholder="0"
+                />
+              </div>
+              <div class="field">
+                <label for="paymentMethod">Payment method</label
+                ><select id="paymentMethod" required>
+                  <option value="Cash">Cash</option>
+                  <option value="M-Pesa">M-Pesa</option>
+                  <option value="Bank">Bank</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-actions">
+                <button class="button" type="submit">Save remittance</button>
+              </div>
+            </form>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Remittance history</h2>
+                <p>All payments you have entered.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Vehicle</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="remittanceTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXPENSES MANAGEMENT -->
+
+        <!-- record running costs and optional vehicle association -->
+        <section id="expensesSection" class="dashboard-section hidden">
+          <div class="panel form-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Record an expense</h2>
+                <p>Keep track of the costs of running your fleet.</p>
+              </div>
+            </div>
+            <form id="expenseForm" class="form-grid">
+              <div class="field">
+                <label for="expenseDate">Expense date</label
+                ><input id="expenseDate" type="date" required />
+              </div>
+              <div class="field">
+                <label for="expenseCategory">Category</label
+                ><select id="expenseCategory" required>
+                  <option value="Fuel">Fuel</option>
+                  <option value="Repair">Repair</option>
+                  <option value="Service">Service</option>
+                  <option value="Insurance">Insurance</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="expenseAmount">Amount (KES)</label
+                ><input
+                  id="expenseAmount"
+                  type="number"
+                  min="1"
+                  step="1"
+                  required
+                  placeholder="0"
+                />
+              </div>
+              <div class="field">
+                <label for="expenseVehicle">Vehicle (optional)</label
+                ><select id="expenseVehicle">
+                  <option value="">General fleet expense</option>
+                </select>
+              </div>
+              <div class="field field-wide">
+                <label for="expenseDescription">Description (optional)</label
+                ><input
+                  id="expenseDescription"
+                  placeholder="Short description"
+                />
+              </div>
+              <div class="form-actions">
+                <button class="button" type="submit">Save expense</button>
+              </div>
+            </form>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Expense history</h2>
+                <p>All expenses you have entered.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Vehicle</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="expenseTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </section>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </body>
 </html>
